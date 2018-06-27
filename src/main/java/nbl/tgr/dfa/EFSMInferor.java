@@ -39,7 +39,7 @@ public class EFSMInferor {
     private String subDataPath = "C:\\Users\\Quan-speedLab\\Dropbox\\Thesis\\TestCasesExtractor\\Example traces\\FTP\\lbnl.anon-ftp.03-01-10.tcpdump\\ftp_field.txt";
     private String testPath = "C:\\Users\\Quan-speedLab\\Dropbox\\Thesis\\TestCasesExtractor\\Example traces\\FTP\\lbnl.anon-ftp.03-01-10.tcpdump\\Test001.txt";
     private List<List<String>> traces = new ArrayList<>();
-    private Map<Integer,List<String>> test = new HashMap<>();
+    private Map<Integer, List<String>> test = new HashMap<>();
 
     private Map<String, List<String>> expecteds = new HashMap<>();
 
@@ -177,6 +177,9 @@ public class EFSMInferor {
             List<String> lst = new ArrayList<>();
             for (int i = 2; i < elm.length; i = i + 2) {
                 String sb = elm[i];
+                if (i + 1 < elm.length) {
+                    sb = sb + "|" + elm[i + 1];
+                }
                 lst.add(sb);
             }
             if (accepted == 1) {
@@ -186,6 +189,48 @@ public class EFSMInferor {
             }
 
         }
+
+    }
+
+    public void doEvaluate_v0(DFAState root) {
+        Map<Integer, List<String>> map = new HashMap<>();
+        for (Map.Entry<Integer, List<String>> entry : test.entrySet()) {
+            List<String> sbm = new ArrayList<>();
+            int exp = entry.getKey();
+            List<String> lst = entry.getValue();
+            for (String str : lst) {
+                String[] splitted = str.split("\\|");
+                if (splitted.length > 1) {
+                    sbm.add(splitted[0]);
+                    //exp.add(splitted[1]);
+                }
+            }
+            map.put(exp, sbm);
+        }
+        int count = 0;
+        for (Map.Entry<Integer, List<String>> entry : map.entrySet()) {
+            List<String> sbm = entry.getValue();
+            int exp = entry.getKey();
+            boolean isAccepted = true;
+            DFAState current = root;
+            for (String input : sbm) {
+                String output = current.doOutput(input);
+                current = current.doTransitWithoutSefl(input);
+                if (current == null) {
+                    isAccepted = false;
+                    break;
+                }
+
+            }
+            if (isAccepted) {
+                count++;
+            }
+
+        }
+        double precise = (double) count / test.size();
+        System.out.println("Number of truely accepted sequence by infered model: " + count);
+        System.out.println("Total sequences: " + test.size());
+        System.out.println("The coverage score:" +precise);
 
     }
 
@@ -327,7 +372,7 @@ public class EFSMInferor {
         System.out.println(precise);
 
     }
-    
+
     public void doResconstruct() {
         DFAState initialDFA = new DFAState(true);
         for (List<String> s : traces) {
@@ -361,7 +406,7 @@ public class EFSMInferor {
         DFAState root = doMerge(initialDFA);
         //doEvaluate_v1(root);
         System.out.println("_______________________________");
-        doEvaluate_v3(root);
+        doEvaluate_v0(root);
 
     }
 

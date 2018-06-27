@@ -1,0 +1,26 @@
+150 |200 |213 |215 UNIX Type: L8|220 |220-
+ 			NOTICE TO USERS
+ 
+     This computer is a Federal computer system and is the property
+     of the United States Government. It is for authorized use only.
+     Users (authorized or unauthorized) have no explicit or implicit
+     expectation of privacy.
+ 
+     Any or all uses of this system and all files on this system
+     may be intercepted, monitored, recorded, copied, audited,
+     inspected, and disclosed to authorized site, Department of
+     Energy, and law enforcement personnel, as well as to authorized
+     officials of other agencies, both domestic and foreign. By
+     using this system, the user consents to such interception,
+     monitoring, recording, copying, auditing, inspection, and
+     disclosure at the discretion of authorized site or Department
+     of Energy personnel.
+ 
+     Unauthorized or improper use of this system may result in
+     administrative disciplinary action and civil and criminal
+     penalties. By continuing to use this system, you indicate your
+     awareness of and consent to these terms and conditions of use.
+     LOG OFF IMMEDIATELY if you do not agree to the conditions stated
+     in this warning.
+ 
+     Your ip address is |221 Goodbye.|221-You have transferred 0 bytes in 0 files.|227 Entering Passive Mode (1|230 |226 |230-The Lawrence Berkeley National Laboratory is operated by the|250 CWD command successful.|257 "/" is current directory.|331 |350 Restarting at |500 |550 /|CWD /p|LIST|MDTM |NOOP|PASS <password>|PASV|PORT |PWD|QUIT|REST |RETR |SITE |SIZE /|SYST|TYPE |USER anonymous

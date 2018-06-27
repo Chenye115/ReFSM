@@ -1,0 +1,35 @@
+Keywords: [150 Opening , TYPE I, OP, 230 Anonymous access granted, restrictions apply., 220-
+ 			NOTICE TO USERS
+ 
+     This computer is a Federal computer system and is the property
+     of the United States Government. It is for authorized use only.
+     Users (authorized or unauthorized) have no explicit or implicit
+     expectation of privacy.
+ 
+     Any or all uses of this system and all files on this system
+     may be intercepted, monitored, recorded, copied, audited,
+     inspected, and disclosed to authorized site, Department of
+     Energy, and law enforcement personnel, as well as to authorized
+     officials of other agencies, both domestic and foreign. By
+     using this system, the user consents to such interception,
+     monitoring, recording, copying, auditing, inspection, and
+     disclosure at the discretion of authorized site or Department
+     of Energy personnel.
+ 
+     Unauthorized or improper use of this system may result in
+     administrative disciplinary action and civil and criminal
+     penalties. By continuing to use this system, you indicate your
+     awareness of and consent to these terms and conditions of use.
+     LOG OFF IMMEDIATELY if you do not agree to the conditions stated
+     in this warning.
+ 
+     Your ip address is , 220 , CWD /, SIZE , RETR , 257 ", 250 CWD command successful., 227 Entering Passive Mode (1, PASV, PORT , 500 , 331 , PASS <password>, 200 , 226 Transfer complete., 213 , USER anonymous, PWD, 550 /, LIST]
+Size :70
+Content :{=412, OPTS=135, MODE=21, 150=5176, 350=479, 230=2111, 550=2572, FEAT=44, U9c77d025U=2, PWD=756, TYPE=2314, Uc8f00071U=2, PORTPORT=2, CDUP=92, STOR=31, PORT=58503, SIZE=944, PASV=5086, 200=52295, PASS=2116, 202=29, 125=15, NLST=46, LIST=1042, RT=1, STRU=5, NOOP=212, mode>=1, 250=1575, 450=6, U8e797c90U=1, 451=22, ORT=9, MACB=5, 331=2133, CWD=3403, 211=152, 530=153, 257=754, 213=851, 214=142, 215=443, RETR=4318, ABOR=76, PPORT=1, SYST=444, HELP=17, SITE=147, LPRT=1, MKD=8, QUIT=472, USER=2266, EPSV=50, 220=1203, CLNT=13, ALLO=29, 221=187, REST=485, STAT=153, 421=20, MDTM=482, 500=9176, 225=1, 226=394, 501=6, 227=4551, 425=170, 502=30, 426=8, 504=13}
+------------------------------------------------------------------------
+BUILD SUCCESS
+------------------------------------------------------------------------
+Total time: 47:59.460s
+Finished at: Sat Dec 30 23:58:56 CST 2017
+Final Memory: 5M/307M
+------------------------------------------------------------------------

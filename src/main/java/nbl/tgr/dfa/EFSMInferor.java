@@ -37,8 +37,9 @@ public class EFSMInferor {
     private String delimiter = ";";
     private String dataPath = "C:\\Users\\Quan-speedLab\\Dropbox\\Thesis\\TestCasesExtractor\\Example traces\\FTP\\lbnl.anon-ftp.03-01-10.tcpdump\\ftp_sequence_fixed.txt";
     private String subDataPath = "C:\\Users\\Quan-speedLab\\Dropbox\\Thesis\\TestCasesExtractor\\Example traces\\FTP\\lbnl.anon-ftp.03-01-10.tcpdump\\ftp_field.txt";
+    private String testPath = "C:\\Users\\Quan-speedLab\\Dropbox\\Thesis\\TestCasesExtractor\\Example traces\\FTP\\lbnl.anon-ftp.03-01-10.tcpdump\\Test001.txt";
     private List<List<String>> traces = new ArrayList<>();
-    private Map<List<String>, Integer> test = new HashMap<>();
+    private Map<Integer,List<String>> test = new HashMap<>();
 
     private Map<String, List<String>> expecteds = new HashMap<>();
 
@@ -158,11 +159,32 @@ public class EFSMInferor {
             }
             lst.add("QUIT|221");
             count++;
-            if (count < 500) {
-                traces.add(lst);
-            } else if (count > 1000) {
-                test.put(lst, 1);
+            traces.add(lst);
+        }
+
+        File testfile = new File(testPath);
+        List<String> tlines = Files.readAllLines(testfile.toPath());
+        int positive = 0;
+        int negative = 0;
+        for (String line : tlines) {
+            String[] data = line.split("\\|");
+            if (data.length < 2) {
+                break;
             }
+            String dataline = data[0];
+            int accepted = Integer.parseInt(data[1]);
+            String[] elm = dataline.split(delimiter);
+            List<String> lst = new ArrayList<>();
+            for (int i = 2; i < elm.length; i = i + 1) {
+                String sb = elm[i];
+                lst.add(sb);
+            }
+            if (accepted == 1) {
+                test.put(positive++, lst);
+            } else if (accepted == 0) {
+                test.put(negative--, lst);
+            }
+
         }
 
     }
@@ -173,7 +195,7 @@ public class EFSMInferor {
 
     public void doEvaluate_v2(DFAState root) {
         Map<List<String>, Queue<String>> map = new HashMap<>();
-        for (List<String> lst : test.keySet()) {
+        for (List<String> lst : test.values()) {
             List<String> sbm = new ArrayList<>();
             Queue<String> exp = new LinkedList<>();
             for (String str : lst) {
@@ -224,7 +246,7 @@ public class EFSMInferor {
 
     public void doEvaluate_v3(DFAState root) {
         Map<List<String>, List<String>> map = new HashMap<>();
-        for (List<String> lst : test.keySet()) {
+        for (List<String> lst : test.values()) {
             List<String> sbm = new ArrayList<>();
             List<String> exp = new ArrayList<>();
             for (String str : lst) {
@@ -275,7 +297,7 @@ public class EFSMInferor {
 
     public void doEvaluate_v1(DFAState root) {
         Map<List<String>, List<String>> map = new HashMap<>();
-        for (List<String> lst : test.keySet()) {
+        for (List<String> lst : test.values()) {
             List<String> sbm = new ArrayList<>();
             List<String> exp = new ArrayList<>();
             for (String str : lst) {
@@ -317,48 +339,7 @@ public class EFSMInferor {
         System.out.println(precise);
 
     }
-
-    public void doEvaluate(DFAState root) {
-        int count = 0;
-        List<List<String>> mutations = new ArrayList<>();
-        for (List<String> lst : test.keySet()) {
-            List<String> clone = new ArrayList<>(lst);
-            Collections.shuffle(clone);
-            mutations.add(clone);
-        }
-        for (List<String> lst : mutations) {
-            if (lst.size() > 1) {
-                if (lst.get(0).equals("USER") && lst.get(1).equals("PASS")) {
-                    test.put(lst, 1);
-                } else {
-                    test.put(lst, 0);
-                }
-            } else {
-                test.put(lst, 0);
-            }
-
-        }
-        for (List<String> lst : test.keySet()) {
-            int trueResult = test.get(lst);
-            int result = -1;
-            DFAState current = root;
-            for (String input : lst) {
-                current = current.doTransitWithoutSefl(input);
-                if (current == null) {
-                    break;
-                }
-            }
-            result = (current == null) ? 0 : 1;
-            if (result == trueResult) {
-                count++;
-            }
-        }
-        double precise = (double) count / test.size();
-        System.out.println(count);
-        System.out.println(test.size());
-        System.out.println(precise);
-    }
-
+    
     public void doResconstruct() {
         DFAState initialDFA = new DFAState(true);
         for (List<String> s : traces) {

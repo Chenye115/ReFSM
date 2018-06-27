@@ -63,7 +63,12 @@ public class PPLiveInferror {
                 String sb = elm[i];
                 lst.add(sb);
             }
-            test.put(positive++, lst);
+            if (accepted == 1) {
+                test.put(positive++, lst);
+            } else if (accepted == 0) {
+                test.put(negative--, lst);
+            }
+
         }
     }
 

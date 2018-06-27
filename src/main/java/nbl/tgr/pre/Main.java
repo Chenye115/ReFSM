@@ -50,9 +50,11 @@ public class Main {
     /**
      * @param args the command line arguments
      */
+    
+    
     public static void main(String[] args) throws IOException {
         // TODO code application logic here
-        PPLiveInferror inferor = new PPLiveInferror();
+        EFSMInferor inferor = new EFSMInferor();
         inferor.doLoading();
         inferor.doResconstruct();
         //inferor.doFieldInfer();
@@ -67,13 +69,6 @@ public class Main {
         } catch (NumberFormatException e) {
             return false;
         }
-    }
-
-    public static void doBitReverse() throws IOException {
-        String path = "C:\\Users\\Quan-speedLab\\Dropbox\\Thesis\\TestCasesExtractor\\Example traces\\BitTorrent\\Bittorrent_revised.pcap";
-        BtrParser parser= new BtrParser(path);
-        List<Session> lstSessions = parser.doParse();
-        System.out.println(lstSessions.size());
     }
 
     public static void doFTPReverse() throws IOException {
@@ -271,6 +266,13 @@ public class Main {
             result.add(s);
         }
         return result;
+    }
+    
+    public static void doBitReverse() throws IOException {
+        String path = "C:\\Users\\Quan-speedLab\\Dropbox\\Thesis\\TestCasesExtractor\\Example traces\\BitTorrent\\Bittorrent_revised.pcap";
+        BtrParser parser= new BtrParser(path);
+        List<Session> lstSessions = parser.doParse();
+        System.out.println(lstSessions.size());
     }
 
 }

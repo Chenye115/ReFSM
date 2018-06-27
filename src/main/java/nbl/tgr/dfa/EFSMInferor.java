@@ -175,7 +175,7 @@ public class EFSMInferor {
             int accepted = Integer.parseInt(data[1]);
             String[] elm = dataline.split(delimiter);
             List<String> lst = new ArrayList<>();
-            for (int i = 2; i < elm.length; i = i + 1) {
+            for (int i = 2; i < elm.length; i = i + 2) {
                 String sb = elm[i];
                 lst.add(sb);
             }
@@ -186,10 +186,6 @@ public class EFSMInferor {
             }
 
         }
-
-    }
-
-    public void getTrueModel() {
 
     }
 
@@ -273,14 +269,6 @@ public class EFSMInferor {
                 if (current == null) {
                     break;
                 }
-//                if (output != null && expected != null && expecteds.containsKey(input)) {
-//                    if (expecteds.get(input).contains(output)) {
-//                        count++;
-//                    }
-//                    if (expected.equals(output)) {
-//                        count++;
-//                    }
-//                }
                 if (output != null && expected != null && output.equals(expected)) {
                     count++;
 
